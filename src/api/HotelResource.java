@@ -1,3 +1,4 @@
+// HotelResource.java
 package api;
 
 import model.Customer;
@@ -11,7 +12,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Wadek on 25/10/2020.
+ * Public-facing service layer for customer interactions with the hotel system.
+ * Manages room search, booking, and customer account operations.
  */
 public class HotelResource {
     private static final CustomerService customerService = new CustomerService();
