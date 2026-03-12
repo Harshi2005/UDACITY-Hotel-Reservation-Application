@@ -1,12 +1,7 @@
-// Reservation.java
 package model;
 
 import java.util.Date;
 
-/**
- * Represents a confirmed booking that links a customer,
- * a specific room, and the check-in / check-out dates.
- */
 public class Reservation {
     private Customer customer;
     private IRoom Iroom;
@@ -30,35 +25,8 @@ public class Reservation {
                 '}';
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public IRoom getIroom() {
-        return Iroom;
-    }
-
-    public void setIroom(IRoom iroom) {
-        Iroom = iroom;
-    }
-
-    public Date getCheckInDate() {
-        return checkInDate;
-    }
-
-    public void setCheckInDate(Date checkInDate) {
-        this.checkInDate = checkInDate;
-    }
-
-    public Date getCheckOutDate() {
-        return checkOutDate;
-    }
-
-    public void setCheckOutDate(Date checkOutDate) {
-        this.checkOutDate = checkOutDate;
-    }
+    public Customer getCustomer() { return customer; }
+    public IRoom getIroom() { return Iroom; }
+    public Date getCheckInDate() { return checkInDate; }
+    public Date getCheckOutDate() { return checkOutDate; }
 }
