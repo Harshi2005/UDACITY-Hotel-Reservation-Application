@@ -1,3 +1,4 @@
+// MainMenu.java
 package menu;
 
 import api.AdminResource;
@@ -10,7 +11,8 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- * Created by Wadek on 26/10/2020.
+ * Primary user interface menu for the hotel reservation application.
+ * Routes user choices to booking, account creation, and admin features.
  */
 public class MainMenu {
     private static final AdminResource adminResource = new AdminResource();
@@ -20,11 +22,11 @@ public class MainMenu {
 
     public static void main(String[] args) {
         input = new Scanner(System.in);
-        int selection = 0;
+        int menuSelection = 0;
 
-        while (selection != exitApp) {
-            selection = showMenu();
-            switch (selection) {
+        while (menuSelection != exitApp) {
+            menuSelection = showMenu();
+            switch (menuSelection) {
                 case 0:
                     findAndReserveRoom();
                     break;
@@ -48,43 +50,41 @@ public class MainMenu {
     }
 
     private static void seeMyReservations() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner userInput = new Scanner(System.in);
         System.out.println("Enter Customer Email:");
-        String email = scanner.next();
-        System.out.println(hotelResource.getCustomerReservations(email));
+        String custEmail = userInput.next();
+        System.out.println(hotelResource.getCustomerReservations(custEmail));
     }
 
     private static Customer createAccount() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner userInput = new Scanner(System.in);
         System.out.println("Enter Customer First Name:");
-        String firstName = scanner.next();
+        String custFirstName = userInput.next();
         System.out.println("Enter Customer Last Name:");
-        String lastName = scanner.next();
+        String custLastName = userInput.next();
         System.out.println("Enter Customer Email:");
-        String email = scanner.next();
+        String custEmail = userInput.next();
 
-
-        hotelResource.createACustomer(email, firstName, lastName);
-        return new Customer(firstName, lastName, email);
-
+        hotelResource.createACustomer(custEmail, custFirstName, custLastName);
+        return new Customer(custFirstName, custLastName, custEmail);
     }
 
     private static void findAndReserveRoom() {
-        Room room = new Room();
-        room.roomType = RoomType.SINGLE;
-        room.price = 12.0;
-        room.roomNumber = "133";
+        Room hotelRoom = new Room();
+        hotelRoom.roomType = RoomType.SINGLE;
+        hotelRoom.price = 12.0;
+        hotelRoom.roomNumber = "133";
 
-        hotelResource.addRoom(room);
+        hotelResource.addRoom(hotelRoom);
         hotelResource.getRoom("133");
 
-        hotelResource.bookARoom(createAccount(), room, new Date(),
+        hotelResource.bookARoom(createAccount(), hotelRoom, new Date(),
                 new Date());
         System.out.println("Reservation was Created");
     }
 
     private static int showMenu() {
-        String[] menus = new String[]{
+        String[] menuOptions = new String[]{
                 "Find and reserve a room",
                 "See my reservations",
                 "Create an account",
@@ -92,8 +92,8 @@ public class MainMenu {
                 "Exit"
         };
 
-        for (int i = 0; i < menus.length; i++) {
-            System.out.println(" " + i + " " + menus[i]);
+        for (int i = 0; i < menuOptions.length; i++) {
+            System.out.println(" " + i + " " + menuOptions[i]);
         }
 
         System.out.println("...........................");
