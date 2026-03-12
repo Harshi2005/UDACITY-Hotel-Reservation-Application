@@ -1,4 +1,3 @@
-// AdminResource.java
 package api;
 
 import model.Customer;
@@ -13,50 +12,49 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Administrative gateway that provides full access to customer records
- * and reservation operations for backend management tasks.
+ * Admin gateway – updated to accept IRoom for polymorphism.
  */
 public class AdminResource {
-    private static final CustomerService customerService = new CustomerService();
-    private static final ReservationService reservationService = new ReservationService();
+    private static final CustomerService custManager = new CustomerService();
+    private static final ReservationService bookingManager = new ReservationService();
 
     public void addCustomer(String email, String firstName, String lastName) {
-        customerService.addCustomer(email, firstName, lastName);
+        custManager.addCustomer(email, firstName, lastName);
     }
 
     public Customer getCustomer(String customerEmail) {
-        return customerService.getCustomer(customerEmail);
+        return custManager.getCustomer(customerEmail);
     }
 
     public List<Customer> getAllCustomers() {
-        return customerService.getAllCustomers();
+        return custManager.getAllCustomers();
     }
 
-    public void addRoom(Room rooms) {
-        reservationService.addRoom(rooms);
+    public void addRoom(IRoom room) {
+        bookingManager.addRoom(room);
     }
 
-    public Reservation reserveRoom(Customer customer, Room room, Date checkInDate, Date checkOutDate) {
-        return reservationService.reserveRoom(customer, room, checkInDate, checkOutDate);
+    public Reservation reserveRoom(Customer customer, IRoom room, Date checkInDate, Date checkOutDate) {
+        return bookingManager.reserveRoom(customer, room, checkInDate, checkOutDate);
     }
 
     public List<Reservation> getCustomerReservation(Customer customer) {
-        return reservationService.getCustomerReservation(customer);
+        return bookingManager.getCustomerReservation(customer);
     }
 
     public void displayAllReservations() {
-        reservationService.printAllReservations();
+        bookingManager.printAllReservations();
     }
 
     public List<Reservation> getCustomerReservations(String customerEmail) {
-        return reservationService.getCustomerReservations(customerEmail);
+        return bookingManager.getCustomerReservations(customerEmail);
     }
 
     public List<IRoom> allRooms() {
-        return reservationService.allRooms();
+        return bookingManager.allRooms();
     }
 
     public Collection<IRoom> findARoom(Date checkInDate, Date checkOutDate) {
-        return null;
+        return bookingManager.findARoom(checkInDate, checkOutDate);
     }
 }
