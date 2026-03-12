@@ -1,3 +1,4 @@
+// AdminMenu.java
 package menu;
 
 import api.AdminResource;
@@ -7,7 +8,8 @@ import model.RoomType;
 import java.util.Scanner;
 
 /**
- * Created by Wadek on 28/10/2020.
+ * Dedicated menu for administrative operations including viewing
+ * all customers, rooms, reservations, and adding new rooms.
  */
 public class AdminMenu {
     public static int navigateToMainMenu = 4;
@@ -16,11 +18,11 @@ public class AdminMenu {
 
     public static void startAdmin() {
         input = new Scanner(System.in);
-        int selection = 0;
+        int menuChoice = 0;
 
-        while (selection != navigateToMainMenu) {
-            selection = showAdminMenu();
-            switch (selection) {
+        while (menuChoice != navigateToMainMenu) {
+            menuChoice = showAdminMenu();
+            switch (menuChoice) {
                 case 0:
                     System.out.println(adminResource.getAllCustomers());
                     break;
@@ -44,32 +46,32 @@ public class AdminMenu {
     }
 
     private static void addRoom() {
-        Room room = new Room();
-        Scanner scanner = new Scanner(System.in);
+        Room hotelRoom = new Room();
+        Scanner roomInput = new Scanner(System.in);
         System.out.println("Enter Room Number:");
-        room.roomNumber = scanner.nextLine().trim();
+        hotelRoom.roomNumber = roomInput.nextLine().trim();
         System.out.println("Enter Room Price:");
-        room.price = scanner.nextDouble();
+        hotelRoom.price = roomInput.nextDouble();
         System.out.println("Choose Room Type: \n 1 -> SINGLE \n 2-> DOUBLE");
-        int type = scanner.nextInt();
-        if (type == 1) {
-            room.roomType = RoomType.SINGLE;
+        int roomTypeChoice = roomInput.nextInt();
+        if (roomTypeChoice == 1) {
+            hotelRoom.roomType = RoomType.SINGLE;
         } else {
-            room.roomType = RoomType.DOUBLE;
+            hotelRoom.roomType = RoomType.DOUBLE;
         }
-        adminResource.addRoom(room);
+        adminResource.addRoom(hotelRoom);
     }
 
     private static int showAdminMenu() {
-        String[] menus = new String[]{
-                "Sea all Customers",
+        String[] adminOptions = new String[]{
+                "See all Customers",
                 "See all Rooms",
                 "See all Reservations",
                 "Add a Room",
                 "Back to Main Menu"
         };
-        for (int i = 0; i < menus.length; i++) {
-            System.out.println(" " + i + " " + menus[i]);
+        for (int i = 0; i < adminOptions.length; i++) {
+            System.out.println(" " + i + " " + adminOptions[i]);
         }
         System.out.println("...........................");
         System.out.println("Enter menu:");
