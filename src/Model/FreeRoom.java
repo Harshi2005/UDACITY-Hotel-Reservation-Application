@@ -1,7 +1,9 @@
+// FreeRoom.java
 package model;
 
 /**
- * Created by Wadek on 25/10/2020.
+ * Extension of Room that represents a complimentary room with zero cost.
+ * Used for special availability cases.
  */
 public class FreeRoom extends Room {
     public FreeRoom() {
