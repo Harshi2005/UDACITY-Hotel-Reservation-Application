@@ -1,46 +1,24 @@
-// CustomerService.java
 package service;
 
 import model.Customer;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Service layer responsible for storing and retrieving all customer records.
- * Includes basic search and addition functionality.
- */
 public class CustomerService {
-    private static final ArrayList<Customer> customers = new ArrayList<>();
-
-    public List<Customer> getCustomerCollection(String customerEmail) {
-        List<Customer> matchingCustomers = new ArrayList<>();
-        for (Customer currentCust : customers) {
-            if (currentCust.getEmail().equals(customerEmail)) {
-                matchingCustomers.add(currentCust);
-            }
-        }
-        return matchingCustomers;
-    }
+    private static final ArrayList<Customer> guestList = new ArrayList<>();
 
     public void addCustomer(String email, String firstName, String lastName) {
-        Customer customer = new Customer(firstName, lastName, email);
-        customers.add(customer);
-        // placeholder record for testing
-        Customer customer1 = new Customer("jdhcdbchkdb", "ncducnucn", "hbhbfhh@gmail.com");
-        customers.add(customer1);
+        Customer guest = new Customer(firstName, lastName, email);
+        guestList.add(guest);
+        // test record
+        Customer testGuest = new Customer("jdhcdbchkdb", "ncducnucn", "hbhbfhh@gmail.com");
+        guestList.add(testGuest);
     }
 
     public Customer getCustomer(String customerEmail) {
-        for (Customer currentCust : customers) {
-            if (currentCust.getEmail().equals(customerEmail)) {
-                return currentCust;
-            }
-        }
+        for (Customer g : guestList) if (g.getEmail().equals(customerEmail)) return g;
         return null;
     }
 
-    public List<Customer> getAllCustomers() {
-        return customers;
-    }
+    public List<Customer> getAllCustomers() { return guestList; }
 }
