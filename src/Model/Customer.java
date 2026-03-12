@@ -1,16 +1,17 @@
+// Customer.java
 package model;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by Wadek on 25/10/2020.
+ * Customer entity that stores personal details and performs
+ * basic email format validation upon creation.
  */
 public class Customer {
     private String firstName;
     private String lastName;
     private String email;
-
 
     public Customer() {
     }
@@ -40,7 +41,6 @@ public class Customer {
         this.lastName = lastName;
         this.email = email;
         emailValidate(email);
-
     }
 
     public String getEmail() {
