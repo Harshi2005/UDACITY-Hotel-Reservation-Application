@@ -1,7 +1,9 @@
+// Room.java
 package model;
 
 /**
- * Created by Wadek on 25/10/2020.
+ * Standard room implementation that fulfills the IRoom contract.
+ * Holds room identifier, pricing, and type information.
  */
 public class Room implements IRoom {
     public String roomNumber ;
@@ -16,7 +18,6 @@ public class Room implements IRoom {
                 ", roomType=" + roomType +
                 '}';
     }
-
 
     @Override
     public String getRoomNumber() {
