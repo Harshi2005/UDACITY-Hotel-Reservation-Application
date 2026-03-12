@@ -1,9 +1,7 @@
-// IRoom.java
 package model;
 
 /**
- * Contract for any room entity in the hotel booking system.
- * Exposes essential room properties and availability check.
+ * Interface for all room types – enables polymorphism.
  */
 public interface IRoom {
     String getRoomNumber();
