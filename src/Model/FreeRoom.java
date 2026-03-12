@@ -1,21 +1,23 @@
-// FreeRoom.java
 package model;
 
 /**
- * Extension of Room that represents a complimentary room with zero cost.
- * Used for special availability cases.
+ * Free room – demonstrates inheritance and is displayed differently.
  */
 public class FreeRoom extends Room {
-    public FreeRoom() {
-        this.price = 0.0;
+    public FreeRoom(String roomNumber, RoomType roomType) {
+        super(roomNumber, 0.0, roomType);
+    }
+
+    @Override
+    public boolean isFree() {
+        return true;
     }
 
     @Override
     public String toString() {
-        return "model.FreeRoom{" +
-                "roomNumber='" + roomNumber + '\'' +
-                ", price=" + price +
-                ", roomType=" + roomType +
+        return "★★★ FREE ROOM (Price $0.0) ★★★ {" +
+                "roomNumber='" + getRoomNumber() + '\'' +
+                ", roomType=" + getRoomType() +
                 '}';
     }
 }
