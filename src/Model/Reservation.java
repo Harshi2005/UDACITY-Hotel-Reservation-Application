@@ -1,9 +1,11 @@
+// Reservation.java
 package model;
 
 import java.util.Date;
 
 /**
- * Created by Wadek on 25/10/2020.
+ * Represents a confirmed booking that links a customer,
+ * a specific room, and the check-in / check-out dates.
  */
 public class Reservation {
     private Customer customer;
@@ -59,5 +61,4 @@ public class Reservation {
     public void setCheckOutDate(Date checkOutDate) {
         this.checkOutDate = checkOutDate;
     }
-
 }
