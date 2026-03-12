@@ -1,57 +1,53 @@
-// HotelResource.java
 package api;
 
 import model.Customer;
 import model.IRoom;
 import model.Reservation;
-import model.Room;
+import model.RoomType;
+
 import service.CustomerService;
 import service.ReservationService;
 
 import java.util.Date;
 import java.util.List;
 
-/**
- * Public-facing service layer for customer interactions with the hotel system.
- * Manages room search, booking, and customer account operations.
- */
 public class HotelResource {
-    private static final CustomerService customerService = new CustomerService();
-    private static final ReservationService reservationService = new ReservationService();
+    private static final CustomerService customerHandler = new CustomerService();
+    private static final ReservationService reservationHandler = new ReservationService();
 
     public void createACustomer(String email, String firstName, String lastName) {
-        customerService.addCustomer(email, firstName, lastName);
+        customerHandler.addCustomer(email, firstName, lastName);
     }
 
     public Customer getCustomer(String customerEmail) {
-        return customerService.getCustomer(customerEmail);
+        return customerHandler.getCustomer(customerEmail);
     }
 
     public List<Customer> getAllCustomers() {
-        return customerService.getAllCustomers();
+        return customerHandler.getAllCustomers();
     }
 
-    public void addRoom(Room room) {
-        reservationService.addRoom(room);
+    public void addRoom(IRoom room) {
+        reservationHandler.addRoom(room);
     }
 
     public IRoom getRoom(String roomNumber) {
-        return reservationService.getARoom(roomNumber);
+        return reservationHandler.getARoom(roomNumber);
     }
 
-    public Reservation bookARoom(Customer customer, Room room, Date checkInDate, Date checkOutDate) {
-        return reservationService.reserveRoom(customer, room, checkInDate, checkOutDate);
+    public Reservation bookARoom(Customer customer, IRoom room, Date checkInDate, Date checkOutDate) {
+        return reservationHandler.reserveRoom(customer, room, checkInDate, checkOutDate);
     }
 
     public List<IRoom> findARoom(Date checkInDate, Date checkOutDate) {
-        return reservationService.findARoom(checkInDate, checkOutDate);
+        return reservationHandler.findARoom(checkInDate, checkOutDate);
     }
 
     public void printAllReservations() {
-        reservationService.printAllReservations();
+        reservationHandler.printAllReservations();
     }
 
     public List<Reservation> getCustomerReservations(String customerEmail) {
-        return reservationService.getCustomerReservations(customerEmail);
+        return reservationHandler.getCustomerReservations(customerEmail);
     }
 }
