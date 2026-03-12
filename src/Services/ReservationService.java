@@ -1,3 +1,4 @@
+// ReservationService.java
 package service;
 
 import model.Customer;
@@ -10,7 +11,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Wadek on 25/10/2020.
+ * Central service managing room inventory and all reservation records.
+ * Handles booking creation, room lookup, and reservation queries.
  */
 public class ReservationService {
     private static final ArrayList<IRoom> rooms = new ArrayList<>();
@@ -36,28 +38,28 @@ public class ReservationService {
     }
 
     public List<IRoom> findARoom(Date checkInDate, Date checkOutDate) {
-        List<IRoom> roomsAccordingToDates = new ArrayList<>();
+        List<IRoom> availableRooms = new ArrayList<>();
         try {
-            for (Reservation reservation : reservations) {
-                if (reservation.getCheckInDate() == checkInDate &&
-                        reservation.getCheckOutDate() == checkOutDate) {
-                    roomsAccordingToDates.add(reservation.getIroom());
+            for (Reservation currentRes : reservations) {
+                if (currentRes.getCheckInDate() == checkInDate &&
+                        currentRes.getCheckOutDate() == checkOutDate) {
+                    availableRooms.add(currentRes.getIroom());
                 }
             }
         } catch (Exception e){
             if (reservations.isEmpty()) return null;
         }
-        return roomsAccordingToDates;
+        return availableRooms;
     }
 
     public List<Reservation> getCustomerReservation(Customer customer) {
-        List<Reservation> reservationsAccordingToCustomer = new ArrayList<>();
-        for (Reservation reservation : reservations) {
-            if (reservation.getCustomer().equals(customer)) {
-                reservationsAccordingToCustomer.add(reservation);
+        List<Reservation> customerBookings = new ArrayList<>();
+        for (Reservation res : reservations) {
+            if (res.getCustomer().equals(customer)) {
+                customerBookings.add(res);
             }
         }
-        return reservationsAccordingToCustomer;
+        return customerBookings;
     }
 
     public void printAllReservations() {
@@ -65,13 +67,13 @@ public class ReservationService {
     }
 
     public List<Reservation> getCustomerReservations(String customerEmail) {
-        List<Reservation> reservationsAccordingToCustomerEmail = new ArrayList<>();
-        for (Reservation reservation : reservations) {
-            if (reservation.getCustomer().getEmail().equals(customerEmail)) {
-                reservationsAccordingToCustomerEmail.add(reservation);
+        List<Reservation> customerBookingsByEmail = new ArrayList<>();
+        for (Reservation res : reservations) {
+            if (res.getCustomer().getEmail().equals(customerEmail)) {
+                customerBookingsByEmail.add(res);
             }
         }
-        return reservationsAccordingToCustomerEmail;
+        return customerBookingsByEmail;
     }
 
     public List<IRoom> allRooms() {
@@ -82,21 +84,21 @@ public class ReservationService {
         Date checkInDate;
         Date checkOutDate;
 
-        List<FreeRoom> openRooms = new ArrayList<>();
-        List<FreeRoom> recommendedRooms = new ArrayList<>();
+        List<FreeRoom> availableRooms = new ArrayList<>();
+        List<FreeRoom> suggestedRooms = new ArrayList<>();
 
         public List<FreeRoom> getOpenRooms() {
-            for (FreeRoom freeRoom : openRooms) {
-                System.out.println(freeRoom);
+            for (FreeRoom fr : availableRooms) {
+                System.out.println(fr);
             }
-            return openRooms;
+            return availableRooms;
         }
 
         public List<FreeRoom> getRecommendedRooms() {
-            for (FreeRoom freeRoom : recommendedRooms) {
-                System.out.println(freeRoom);
+            for (FreeRoom fr : suggestedRooms) {
+                System.out.println(fr);
             }
-            return recommendedRooms;
+            return suggestedRooms;
         }
     }
 }
