@@ -1,14 +1,22 @@
-// Room.java
 package model;
 
 /**
- * Standard room implementation that fulfills the IRoom contract.
- * Holds room identifier, pricing, and type information.
+ * Standard room with encapsulation and validation.
  */
 public class Room implements IRoom {
-    public String roomNumber ;
-    public Double price;
-    public RoomType roomType;
+    private final String roomNumber;
+    private final Double price;
+    private final RoomType roomType;
+
+    public Room(String roomNumber, Double price, RoomType roomType) {
+        if (roomNumber == null || roomNumber.trim().isEmpty())
+            throw new IllegalArgumentException("Room number cannot be empty!");
+        if (price < 0)
+            throw new IllegalArgumentException("Price cannot be negative!");
+        this.roomNumber = roomNumber.trim();
+        this.price = price;
+        this.roomType = roomType;
+    }
 
     @Override
     public String toString() {
@@ -19,33 +27,8 @@ public class Room implements IRoom {
                 '}';
     }
 
-    @Override
-    public String getRoomNumber() {
-        return roomNumber;
-    }
-
-    @Override
-    public Double getRoomPrice() {
-        return price;
-    }
-
-    @Override
-    public RoomType getRoomType() {
-        return roomType;
-    }
-
-    @Override
-    public boolean isFree() {
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
+    @Override public String getRoomNumber() { return roomNumber; }
+    @Override public Double getRoomPrice() { return price; }
+    @Override public RoomType getRoomType() { return roomType; }
+    @Override public boolean isFree() { return false; }
 }
